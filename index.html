@@ -82,17 +82,16 @@
             aspect-ratio: 1;
             border-radius: 8px;
             cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            display: grid;
+            grid-template-rows: auto 1fr auto auto;
+            padding: 4px;
             transition: all 0.3s ease;
             border: 2px solid transparent;
             position: relative;
             overflow: hidden;
         }
 
-        .element:hover {
+        .element:not(.empty):hover {
             transform: scale(1.1);
             z-index: 10;
             box-shadow: 0 8px 16px rgba(0,0,0,0.3);
@@ -100,38 +99,42 @@
         }
 
         .element .atomic-number {
-            font-size: 0.7em;
+            font-size: clamp(0.5em, 1.5vw, 0.7em);
             font-weight: bold;
-            position: absolute;
-            top: 3px;
-            left: 5px;
+            text-align: left;
+            line-height: 1;
         }
 
         .element .symbol {
-            font-size: 1.5em;
+            font-size: clamp(1em, 2.5vw, 1.8em);
             font-weight: bold;
-            margin: 5px 0;
+            text-align: center;
+            align-self: center;
+            line-height: 1;
         }
 
         .element .name {
-            font-size: 0.65em;
+            font-size: clamp(0.45em, 1.2vw, 0.7em);
             text-align: center;
+            line-height: 1.1;
+            margin-top: 2px;
+            word-break: keep-all;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .element .mass {
-            font-size: 0.6em;
-            position: absolute;
-            bottom: 3px;
+            font-size: clamp(0.4em, 1vw, 0.6em);
+            text-align: center;
+            line-height: 1;
+            margin-top: 2px;
         }
 
         .empty {
-            background: transparent;
+            background: transparent !important;
             cursor: default;
-        }
-
-        .empty:hover {
-            transform: none;
-            box-shadow: none;
+            pointer-events: none;
         }
 
         /* Element Categories */
@@ -251,19 +254,44 @@
                 gap: 2px;
                 padding: 10px;
             }
-            
-            .element .symbol {
-                font-size: 1.2em;
+        }
+
+        @media (max-width: 900px) {
+            h1 {
+                font-size: 2em;
             }
             
-            .element .name {
-                font-size: 0.55em;
+            .periodic-table {
+                gap: 1px;
+                padding: 8px;
+            }
+            
+            .element {
+                padding: 2px;
             }
         }
 
         @media (max-width: 768px) {
             h1 {
-                font-size: 1.8em;
+                font-size: 1.6em;
+            }
+            
+            .subtitle {
+                font-size: 0.9em;
+            }
+            
+            .legend {
+                gap: 8px;
+                padding: 10px;
+            }
+            
+            .legend-item {
+                font-size: 0.75em;
+            }
+            
+            .legend-color {
+                width: 25px;
+                height: 18px;
             }
             
             .periodic-table {
@@ -271,25 +299,62 @@
                 padding: 5px;
             }
             
-            .element .atomic-number {
-                font-size: 0.5em;
-            }
-            
-            .element .symbol {
-                font-size: 0.9em;
-            }
-            
-            .element .name {
-                display: none;
-            }
-            
-            .element .mass {
-                font-size: 0.45em;
+            .element {
+                padding: 1px;
+                border-radius: 4px;
             }
             
             .modal-content {
                 margin: 10% 5%;
                 padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.3em;
+            }
+            
+            .subtitle {
+                font-size: 0.8em;
+            }
+            
+            .legend {
+                gap: 5px;
+                padding: 8px;
+            }
+            
+            .legend-item {
+                font-size: 0.65em;
+            }
+            
+            .legend-color {
+                width: 20px;
+                height: 15px;
+            }
+            
+            body {
+                padding: 10px;
+            }
+            
+            header {
+                margin-bottom: 15px;
+            }
+            
+            .periodic-table {
+                gap: 0.5px;
+                padding: 3px;
+            }
+            
+            .element {
+                padding: 1px;
+                border-radius: 3px;
+                border-width: 1px;
+            }
+            
+            /* Hide name on very small screens to prevent overlap */
+            .element .name {
+                display: none;
             }
         }
     </style>
