@@ -160,6 +160,8 @@
             height: 100%;
             background: rgba(0,0,0,0.7);
             animation: fadeIn 0.3s;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         @keyframes fadeIn {
@@ -169,10 +171,11 @@
 
         .modal-content {
             background: white;
-            margin: 5% auto;
+            margin: 3% auto;
+            margin-bottom: 5%;
             padding: 30px;
             border-radius: 20px;
-            max-width: 600px;
+            max-width: 900px;
             position: relative;
             animation: slideIn 0.3s;
             box-shadow: 0 20px 60px rgba(0,0,0,0.5);
@@ -205,21 +208,64 @@
         }
 
         .modal-header {
-            text-align: center;
-            margin-bottom: 25px;
-            padding-bottom: 20px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            padding-right: 40px;
             border-bottom: 2px solid #eee;
+            align-items: start;
+        }
+
+        .modal-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
         }
 
         .modal-symbol {
             font-size: 4em;
             font-weight: bold;
-            margin: 10px 0;
+            line-height: 1;
+            margin-bottom: 5px;
         }
 
         .modal-name {
-            font-size: 1.8em;
-            margin: 5px 0;
+            font-size: 1.3em;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .modal-3d-container {
+            position: relative;
+            width: 100%;
+            max-width: 350px;
+            height: 280px;
+            background: #1a1a2e;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
+            margin-left: 0;
+        }
+
+        .model-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .atom-info-overlay {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            pointer-events: none;
+            line-height: 1.6;
         }
 
         .modal-body {
@@ -242,6 +288,32 @@
 
         .info-value {
             color: #212529;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        footer p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        footer .credit {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        footer .year {
+            font-size: 0.9em;
+            color: #888;
         }
 
         .lanthanide-actinide {
@@ -305,8 +377,55 @@
             }
             
             .modal-content {
-                margin: 10% 5%;
+                margin: 2% 3%;
+                margin-bottom: 5%;
                 padding: 20px;
+                max-height: none;
+            }
+
+            .modal-header {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding-right: 35px;
+            }
+
+            .modal-3d-container {
+                height: 250px;
+                max-width: 100%;
+            }
+
+            .modal-symbol {
+                font-size: 3.5em;
+            }
+
+            .modal-name {
+                font-size: 1.3em;
+            }
+
+            .info-row {
+                grid-template-columns: 140px 1fr;
+                padding: 10px;
+            }
+
+            .info-label {
+                font-size: 0.9em;
+            }
+
+            .info-value {
+                font-size: 0.9em;
+            }
+
+            footer {
+                padding: 15px;
+                margin-top: 20px;
+            }
+
+            footer .credit {
+                font-size: 1em;
+            }
+
+            footer .year {
+                font-size: 0.85em;
             }
         }
 
@@ -410,6 +529,16 @@
         </div>
 
         <div class="periodic-table" id="periodicTable"></div>
+
+        <footer>
+            <p class="credit">ผู้จัดทำ<br>
+                นาย กฤติน เบ็ญจชาติ ม.6/1 เลขที่ 1<br>
+                นาย ชวิศ เสลาคุณ   ม.6/1 เลขที่ 3<br>
+                นาย พลภูวัชร์ มณีฉายโชติภัทร์ ม.6/1 เลขที่ 5<br>
+                นาย พัชรพล เปงอิน ม.6/1 เลขที่ 6
+            </p>
+            <p class="year">© 2025 ตารางธาตุ Interactive</p>
+        </footer>
     </div>
 
     <!-- Modal -->
@@ -417,9 +546,15 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <div class="modal-header">
-                <div class="modal-symbol" id="modalSymbol"></div>
-                <div class="modal-name" id="modalName"></div>
-                <div id="modalEnglishName" style="color: #666; font-size: 1.1em;"></div>
+                <div class="modal-info">
+                    <div class="modal-symbol" id="modalSymbol"></div>
+                    <div class="modal-name" id="modalName"></div>
+                    <div id="modalEnglishName" style="color: #666; font-size: 1em; margin-top: 3px;"></div>
+                </div>
+                <div class="modal-3d-container">
+                    <div id="model3D"></div>
+                    <div class="atom-info-overlay" id="atomInfo"></div>
+                </div>
             </div>
             <div class="modal-body" id="modalBody"></div>
         </div>
@@ -556,22 +691,177 @@
             28: [4,10], 29: [4,11], 30: [4,12], 31: [4,13], 32: [4,14], 33: [4,15], 34: [4,16], 35: [4,17], 36: [4,18],
             37: [5,1], 38: [5,2], 39: [5,3], 40: [5,4], 41: [5,5], 42: [5,6], 43: [5,7], 44: [5,8], 45: [5,9],
             46: [5,10], 47: [5,11], 48: [5,12], 49: [5,13], 50: [5,14], 51: [5,15], 52: [5,16], 53: [5,17], 54: [5,18],
-            55: [6,1], 56: [6,2], 57: [8,3], 72: [6,4], 73: [6,5], 74: [6,6], 75: [6,7], 76: [6,8], 77: [6,9],
+            55: [6,1], 56: [6,2], 57: [9,3], 72: [6,4], 73: [6,5], 74: [6,6], 75: [6,7], 76: [6,8], 77: [6,9],
             78: [6,10], 79: [6,11], 80: [6,12], 81: [6,13], 82: [6,14], 83: [6,15], 84: [6,16], 85: [6,17], 86: [6,18],
-            87: [7,1], 88: [7,2], 89: [9,3], 104: [7,4], 105: [7,5], 106: [7,6], 107: [7,7], 108: [7,8], 109: [7,9],
+            87: [7,1], 88: [7,2], 89: [10,3], 104: [7,4], 105: [7,5], 106: [7,6], 107: [7,7], 108: [7,8], 109: [7,9],
             110: [7,10], 111: [7,11], 112: [7,12], 113: [7,13], 114: [7,14], 115: [7,15], 116: [7,16], 117: [7,17], 118: [7,18],
-            58: [8,4], 59: [8,5], 60: [8,6], 61: [8,7], 62: [8,8], 63: [8,9], 64: [8,10], 65: [8,11],
-            66: [8,12], 67: [8,13], 68: [8,14], 69: [8,15], 70: [8,16], 71: [8,17],
-            90: [9,4], 91: [9,5], 92: [9,6], 93: [9,7], 94: [9,8], 95: [9,9], 96: [9,10], 97: [9,11],
-            98: [9,12], 99: [9,13], 100: [9,14], 101: [9,15], 102: [9,16], 103: [9,17]
+            58: [9,4], 59: [9,5], 60: [9,6], 61: [9,7], 62: [9,8], 63: [9,9], 64: [9,10], 65: [9,11],
+            66: [9,12], 67: [9,13], 68: [9,14], 69: [9,15], 70: [9,16], 71: [9,17],
+            90: [10,4], 91: [10,5], 92: [10,6], 93: [10,7], 94: [10,8], 95: [10,9], 96: [10,10], 97: [10,11],
+            98: [10,12], 99: [10,13], 100: [10,14], 101: [10,15], 102: [10,16], 103: [10,17]
         };
 
         const table = document.getElementById('periodicTable');
         const modal = document.getElementById('modal');
         const closeBtn = document.getElementsByClassName('close')[0];
 
+        // Function to create 3D model viewer
+        function create3DModel(element) {
+            const modelContainer = document.getElementById('model3D');
+            const atomInfo = document.getElementById('atomInfo');
+            
+            const protons = element.number;
+            const neutrons = Math.round(parseFloat(element.mass) - protons);
+            const electrons = protons;
+            
+            // Update atom info overlay
+            atomInfo.innerHTML = `
+                <strong>โปรตอน:</strong> ${protons}<br>
+                <strong>นิวตรอน:</strong> ${neutrons}<br>
+                <strong>อิเล็กตรอน:</strong> ${electrons}
+            `;
+            
+            // Calculate number of shells to determine scale
+            const shellCapacity = [2, 8, 18, 32, 32, 18, 8];
+            let remaining = electrons;
+            let numShells = 0;
+            for (let i = 0; i < shellCapacity.length && remaining > 0; i++) {
+                numShells++;
+                remaining -= Math.min(remaining, shellCapacity[i]);
+            }
+            
+            // Dynamic scaling based on number of shells - MORE AGGRESSIVE
+            let modelScale = 1;
+            let nucleusSize = Math.min(60, 25 + protons * 0.2);
+            let baseRadius = 40;
+            let radiusIncrement = 22;
+            
+            if (numShells >= 7) {
+                modelScale = 0.32;
+                baseRadius = 35;
+                radiusIncrement = 18;
+                nucleusSize = Math.min(40, 20 + protons * 0.15);
+            } else if (numShells >= 6) {
+                modelScale = 0.38;
+                baseRadius = 38;
+                radiusIncrement = 20;
+                nucleusSize = Math.min(45, 22 + protons * 0.17);
+            } else if (numShells >= 5) {
+                modelScale = 0.48;
+                baseRadius = 40;
+                radiusIncrement = 22;
+                nucleusSize = Math.min(50, 23 + protons * 0.18);
+            } else if (numShells >= 4) {
+                modelScale = 0.65;
+                baseRadius = 42;
+                radiusIncrement = 25;
+                nucleusSize = Math.min(55, 24 + protons * 0.19);
+            } else if (numShells >= 3) {
+                modelScale = 0.85;
+                baseRadius = 45;
+                radiusIncrement = 28;
+            }
+            
+            const containerSize = 240 * modelScale;
+            
+            // Calculate dynamic padding to center model vertically
+            // Smaller models need less padding, larger models need more
+            const verticalPadding = Math.max(10, 50 - (modelScale * 40));
+            
+            // Create a simple visual representation using HTML/CSS
+            modelContainer.innerHTML = `
+                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; background: radial-gradient(circle at center, #2a2a4e 0%, #1a1a2e 100%); padding: ${verticalPadding+35}px 50px;">
+                <div class="atom-model-display" style="
+    position: relative;
+    width: ${containerSize}px;
+    height: ${containerSize}px;
+    margin: auto;
+    transform: translateY(${verticalPadding * 0.5}px);
+">
+
+                        <div class="nucleus" style="
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            width: ${nucleusSize}px;
+                            height: ${nucleusSize}px;
+                            border-radius: 50%;
+                            background: radial-gradient(circle at 30% 30%, #ff6b6b, #cc0000);
+                            box-shadow: 0 0 ${Math.max(15, 30 * modelScale)}px rgba(255, 107, 107, 0.6), inset 0 0 ${Math.max(10, 20 * modelScale)}px rgba(0,0,0,0.3);
+                            animation: pulse 2s ease-in-out infinite;
+                        "></div>
+                        ${createElectronShells(electrons, baseRadius, radiusIncrement, modelScale)}
+                    </div>
+                </div>
+                <style>
+                    @keyframes pulse {
+                        0%, 100% { transform: translate(-50%, -50%) scale(1); }
+                        50% { transform: translate(-50%, -50%) scale(1.05); }
+                    }
+                    @keyframes orbit {
+                        from { transform: rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg); }
+                        to { transform: rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg); }
+                    }
+                    .electron-orbit {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        border: ${Math.max(1, 2 * modelScale)}px solid rgba(100, 150, 255, 0.3);
+                        border-radius: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                    .electron {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        width: ${Math.max(5, 10 * modelScale)}px;
+                        height: ${Math.max(5, 10 * modelScale)}px;
+                        background: radial-gradient(circle at 30% 30%, #66b3ff, #0066cc);
+                        border-radius: 50%;
+                        box-shadow: 0 0 ${Math.max(8, 15 * modelScale)}px rgba(102, 179, 255, 0.8);
+                        animation: orbit linear infinite;
+                    }
+                </style>
+            `;
+        }
+
+        function createElectronShells(totalElectrons, baseRadius = 40, radiusIncrement = 22, scale = 1) {
+            const shellCapacity = [2, 8, 18, 32, 32, 18, 8];
+            let remaining = totalElectrons;
+            let html = '';
+            
+            shellCapacity.forEach((capacity, index) => {
+                if (remaining <= 0) return;
+                
+                const electronsInShell = Math.min(remaining, capacity);
+                const radius = baseRadius + (index * radiusIncrement);
+                
+                // Create orbit ring
+                html += `<div class="electron-orbit" style="width: ${radius * 2}px; height: ${radius * 2}px;"></div>`;
+                
+                // Create electrons
+                for (let i = 0; i < electronsInShell; i++) {
+                    const angle = (360 / electronsInShell) * i;
+                    const duration = 3 + (index * 1.5);
+                    const delay = (duration / electronsInShell) * i;
+                    
+                    html += `<div class="electron" style="
+                        --orbit-radius: ${radius}px;
+                        animation-duration: ${duration}s;
+                        animation-delay: -${delay}s;
+                        transform: rotate(${angle}deg) translateX(${radius}px) rotate(-${angle}deg);
+                    "></div>`;
+                }
+                
+                remaining -= electronsInShell;
+            });
+            
+            return html;
+        }
+
         // Create grid with proper positioning
-        const maxRow = 9;
+        const maxRow = 10;
         const maxCol = 18;
         
         // Initialize grid
@@ -653,6 +943,9 @@
             
             modal.style.display = 'block';
             document.getElementById('modalSymbol').style.color = getComputedStyle(document.querySelector(`.${element.category}`)).backgroundColor;
+            
+            // Create 3D model
+            create3DModel(element);
         }
 
         closeBtn.onclick = () => modal.style.display = 'none';
@@ -668,7 +961,6 @@
                 modal.style.display = 'none';
             }
         });
-        //test
     </script>
 </body>
 </html>
