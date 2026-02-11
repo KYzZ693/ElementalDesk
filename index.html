@@ -17,6 +17,37 @@
             min-height: 100vh;
             padding: 20px;
             color: #333;
+            transition: background 0.5s ease, color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            color: #e0e0e0;
+        }
+
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 1.5em;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+        body.dark-mode .dark-mode-toggle {
+            background: rgba(30,30,50,0.9);
         }
 
         .container {
@@ -28,6 +59,11 @@
             text-align: center;
             color: white;
             margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode header {
+            color: #b8b8ff;
         }
 
         h1 {
@@ -51,6 +87,12 @@
             background: rgba(255,255,255,0.95);
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .legend {
+            background: rgba(30,30,50,0.95);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.5);
         }
 
         .legend-item {
@@ -58,6 +100,11 @@
             align-items: center;
             gap: 8px;
             font-size: 0.9em;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .legend-item {
+            color: #d0d0d0;
         }
 
         .legend-color {
@@ -76,6 +123,12 @@
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .periodic-table {
+            background: rgba(30,30,50,0.95);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
         }
 
         .element {
@@ -164,6 +217,10 @@
             -webkit-overflow-scrolling: touch;
         }
 
+        body.dark-mode .modal {
+            background: rgba(0,0,0,0.9);
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -179,6 +236,12 @@
             position: relative;
             animation: slideIn 0.3s;
             box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .modal-content {
+            background: #1e1e32;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.9);
         }
 
         @keyframes slideIn {
@@ -207,6 +270,14 @@
             color: #000;
         }
 
+        body.dark-mode .close {
+            color: #888;
+        }
+
+        body.dark-mode .close:hover {
+            color: #fff;
+        }
+
         .modal-header {
             display: grid;
             grid-template-columns: 280px 1fr;
@@ -216,6 +287,11 @@
             padding-right: 40px;
             border-bottom: 2px solid #eee;
             align-items: start;
+            transition: border-color 0.3s ease;
+        }
+
+        body.dark-mode .modal-header {
+            border-bottom-color: #444;
         }
 
         .modal-info {
@@ -229,12 +305,27 @@
             font-weight: bold;
             line-height: 1;
             margin-bottom: 5px;
+            transition: color 0.3s ease;
         }
 
         .modal-name {
             font-size: 1.3em;
             margin: 0;
             line-height: 1.2;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .modal-name {
+            color: #e0e0e0;
+        }
+
+        #modalEnglishName {
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode #modalEnglishName {
+            color: #999 !important;
         }
 
         .modal-3d-container {
@@ -247,6 +338,12 @@
             overflow: hidden;
             box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
             margin-left: 0;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .modal-3d-container {
+            background: #0a0a1a;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
         }
 
         .model-iframe {
@@ -279,15 +376,30 @@
             padding: 12px;
             background: #f8f9fa;
             border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        body.dark-mode .info-row {
+            background: #2a2a40;
         }
 
         .info-label {
             font-weight: bold;
             color: #495057;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .info-label {
+            color: #b0b0d0;
         }
 
         .info-value {
             color: #212529;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .info-value {
+            color: #d0d0d0;
         }
 
         footer {
@@ -297,11 +409,22 @@
             background: rgba(255,255,255,0.95);
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode footer {
+            background: rgba(30,30,50,0.95);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.5);
         }
 
         footer p {
             margin: 5px 0;
             color: #666;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode footer p {
+            color: #b0b0b0;
         }
 
         footer .credit {
@@ -309,11 +432,21 @@
             font-weight: bold;
             color: #667eea;
             margin-bottom: 5px;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode footer .credit {
+            color: #9d9dff;
         }
 
         footer .year {
             font-size: 0.9em;
             color: #888;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode footer .year {
+            color: #999;
         }
 
         .lanthanide-actinide {
@@ -479,6 +612,8 @@
     </style>
 </head>
 <body>
+    <button class="dark-mode-toggle" id="darkModeToggle" title="สลับโหมดมืด/สว่าง (กดล้อเมาส์)">🌙</button>
+    
     <div class="container">
         <header>
             <h1>⚛️ ตารางธาตุ Interactive</h1>
@@ -531,12 +666,7 @@
         <div class="periodic-table" id="periodicTable"></div>
 
         <footer>
-            <p class="credit">ผู้จัดทำ<br>
-                นาย กฤติน เบ็ญจชาติ ม.6/1 เลขที่ 1<br>
-                นาย ชวิศ เสลาคุณ   ม.6/1 เลขที่ 3<br>
-                นาย พลภูวัชร์ มณีฉายโชติภัทร์ ม.6/1 เลขที่ 5<br>
-                นาย พัชรพล เปงอิน ม.6/1 เลขที่ 6
-            </p>
+            <p class="credit">ผู้จัดทำ: [ใส่ชื่อของคุณที่นี่]</p>
             <p class="year">© 2025 ตารางธาตุ Interactive</p>
         </footer>
     </div>
@@ -704,6 +834,41 @@
         const table = document.getElementById('periodicTable');
         const modal = document.getElementById('modal');
         const closeBtn = document.getElementsByClassName('close')[0];
+        const darkModeToggle = document.getElementById('darkModeToggle');
+
+        // Dark Mode functionality
+        let isDarkMode = localStorage.getItem('darkMode') === 'true';
+        
+        function toggleDarkMode() {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark-mode', isDarkMode);
+            darkModeToggle.textContent = isDarkMode ? '☀️' : '🌙';
+            localStorage.setItem('darkMode', isDarkMode);
+        }
+
+        // Initialize dark mode from localStorage
+        if (isDarkMode) {
+            document.body.classList.add('dark-mode');
+            darkModeToggle.textContent = '☀️';
+        }
+
+        // Toggle on button click
+        darkModeToggle.addEventListener('click', toggleDarkMode);
+
+        // Toggle on middle mouse button
+        document.addEventListener('mousedown', (e) => {
+            if (e.button === 1) { // Middle button
+                e.preventDefault();
+                toggleDarkMode();
+            }
+        });
+
+        // Prevent default middle-click scroll
+        document.addEventListener('auxclick', (e) => {
+            if (e.button === 1) {
+                e.preventDefault();
+            }
+        });
 
         // Function to create 3D model viewer
         function create3DModel(element) {
@@ -770,15 +935,8 @@
             
             // Create a simple visual representation using HTML/CSS
             modelContainer.innerHTML = `
-                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; background: radial-gradient(circle at center, #2a2a4e 0%, #1a1a2e 100%); padding: ${verticalPadding+35}px 50px;">
-                <div class="atom-model-display" style="
-    position: relative;
-    width: ${containerSize}px;
-    height: ${containerSize}px;
-    margin: auto;
-    transform: translateY(${verticalPadding * 0.5}px);
-">
-
+                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; background: radial-gradient(circle at center, #2a2a4e 0%, #1a1a2e 100%); padding: ${verticalPadding}px 20px;">
+                    <div class="atom-model-display" style="position: relative; width: ${containerSize}px; height: ${containerSize}px; margin: auto;">
                         <div class="nucleus" style="
                             position: absolute;
                             top: 50%;
